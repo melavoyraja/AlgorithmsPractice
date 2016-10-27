@@ -39,7 +39,6 @@ public class LeastCommonAncestor {
         if(root == null){
             return false;
         }else if(root.data == v1 || returnPath(root.left,v1,path1) || returnPath(root.right,v1,path1)){
-
             path1.push(root);
             return true;
         }
