@@ -1,5 +1,7 @@
 package me.neu.Tree;
 
+import sun.reflect.generics.tree.Tree;
+
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Stack;
@@ -101,12 +103,59 @@ public class TreeTraversals {
     }
 
 
-    /*-- Spiral Order Iterative--*/
+    /*-- Spiral Order Traversal--*/
+    static void spiralOrder(TreeNode root){
+        Stack<TreeNode> evenStack = new Stack<>();
+        Stack<TreeNode> oddStack = new Stack<>();
+
+        boolean isEvenStack = true;
+        evenStack.push(root);
+        while ( (isEvenStack && !evenStack.isEmpty()) || !oddStack.isEmpty() ){
+            if(isEvenStack){
+                while(!evenStack.isEmpty()){
+                    TreeNode currentNode = evenStack.pop();
+                    System.out.print(currentNode.data);
+                    if(currentNode.right != null){
+                        oddStack.push(currentNode.right);
+                    }
+
+                    if(currentNode.left !=null){
+                        oddStack.push(currentNode.left);
+                    }
+
+
+                }
+            }else{
+                while(!oddStack.isEmpty()){
+                    TreeNode currentNode = oddStack.pop();
+                    System.out.print(currentNode.data);
+                    if(currentNode.left != null){
+                        evenStack.push(currentNode.left);
+                    }
+                    if(currentNode.right != null){
+                        evenStack.push(currentNode.right);
+                    }
+
+                }
+
+            }
+
+            isEvenStack = !isEvenStack;
+
+        }
+
+
+    }
+
+
     /*-- Pre Order Iterative--*/
+
     /*-- In Order Iterative--*/
+
     /*-- Post Order Iterative--*/
-    /*-- Validate BST --*/
+
     /*-- Mirror a Tree --*/
+
     /*-- Copy a Tree --*/
 
 
@@ -152,5 +201,10 @@ public class TreeTraversals {
         System.out.println("LCA");
         TreeNode commonNode = lca(root1,3,7);
         System.out.println(commonNode.data);
+        System.out.println("Spiral Level Order");
+        spiralOrder(root1);
+        System.out.println();
+        System.out.println("Is a valid BST");
+//        System.out.println(isValidBST(root1));
     }
 }
